@@ -37,10 +37,10 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,  U
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as EmojiCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! EmojiCell
         cell.cellLabel.text = emojiList[indexPath.section][indexPath.row]
         for c in emojiList[indexPath.section][indexPath.row].unicodeScalars {
-            cell.valueLabel.text = NSString(format: "0x%2X", c.value)
+            cell.valueLabel.text = NSString(format: "0x%2X", c.value) as String
         }
         return cell
     }
@@ -48,13 +48,13 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionElementKindSectionHeader {
-            let supplementaryViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as HeaderReusableView
+            let supplementaryViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as! HeaderReusableView
                 supplementaryViewCell.headerLabel.text = sectionTitle[indexPath.section]
                 supplementaryViewCell.headerLabel.textColor = UIColor.whiteColor()
                 supplementaryViewCell.backgroundColor = UIColor.darkGrayColor()
                 return supplementaryViewCell
         } else {
-            let supplementaryViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Footer", forIndexPath: indexPath) as FooterReusableView
+            let supplementaryViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Footer", forIndexPath: indexPath) as! FooterReusableView
             
             if currentEmoji.isEmpty {
                 supplementaryViewCell.footerLabel.text = ""
